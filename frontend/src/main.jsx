@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import {
   createBrowserRouter,
-  Route,
   RouterProvider,
 } from "react-router-dom";
 import Contact from './pages/contact';
@@ -15,7 +14,7 @@ const router = createBrowserRouter([
   },  
   {
     path: "/rafi",
-    element: <div>Hello Rafi!</div>,
+    element: <Contact/>,
   },  
 ]);
 

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ function Contact() {
       .then((response) => {
         if (response.data.message) {
           setResponseMessage(response.data.message);
-          setFormData({ name: "", email: "", message: "" }); // Clear the form
+          setFormData({ name: "", email: "", message: "" });
         } else if (response.data.error) {
           setResponseMessage(response.data.error);
         }
