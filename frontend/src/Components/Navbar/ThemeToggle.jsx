@@ -4,11 +4,11 @@ import { LuMoon } from "react-icons/lu";
 
 const ThemeToggle = () => {
     // Load theme from localStorage or set default theme
-    const [theme, setTheme] = useState(localStorage.getItem("theme") || "black");
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "dracula");
 
     // Function to toggle between themes
     const toggleTheme = () => {
-        const newTheme = theme === "lofi" ? "black" : "lofi"; // Toggle between 'lofi' and 'black'
+        const newTheme = theme === "emerald" ? "dracula" : "emerald"; // Toggle between 'lofi' and 'black'
         setTheme(newTheme);
         document.documentElement.setAttribute("data-theme", newTheme); // Set the new theme
         localStorage.setItem("theme", newTheme); // Persist theme in localStorage
@@ -22,7 +22,7 @@ const ThemeToggle = () => {
     return (
         <label className="swap swap-rotate px-4 sm:px-0">
             {/* Hidden checkbox controls the state */}
-            <input type="checkbox" onChange={toggleTheme} checked={theme === "black"} />
+            <input type="checkbox" onChange={toggleTheme} checked={theme === "dracula"} />
 
             {/* Sun icon for lofi mode */}
             <FiSun className="swap-on h-5 w-5 fill-current text-[#ffffff]" />

@@ -4,17 +4,27 @@ import {
 import Root from "../Root/Root";
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import Home from "../Components/Home/home";
+import LogIn from "../Components/Authentication/LogIn/LogIn";
+import SignUp from "../Components/Authentication/SignUp/SignUp";
 
 const Routes = createBrowserRouter([
     {
         path: '/',
-        element: <Root/>,
-        errorElement: <ErrorPage/>,
+        element: <Root />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: '/',
-                element: <Home/>,
+                element: <Home />,
             },
+            {
+                path: '/login',
+                element: <LogIn />,
+            },
+            {
+                path: '/signup',
+                element: <SignUp />,
+            }
         ]
     }
 ]);
