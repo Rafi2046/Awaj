@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
+import axios from 'axios';
 
 const SignUp = () => {
 
