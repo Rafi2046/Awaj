@@ -21,7 +21,8 @@ const SignUp = () => {
         createUser(email, password)
             .then(res => {
                 console.log(res);
-
+                emailVerification();
+                
                 // tor kam ene
                 axios.post('/user', loginInfo)
                     .then(function (response) {
@@ -30,7 +31,7 @@ const SignUp = () => {
                     .catch(function (error) {
                         console.log(error);
                     });
-                emailVerification();
+                
 
             })
             .catch(error => {
