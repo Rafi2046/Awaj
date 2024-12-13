@@ -24,7 +24,7 @@ const SignUp = () => {
                 emailVerification();
                 
                 // tor kam ene
-                axios.post('/user', loginInfo)
+                axios.post('../../../../../backend/signup.php', loginInfo)
                     .then(function (response) {
                         console.log(response);
                     })
