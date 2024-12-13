@@ -3,7 +3,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 
 const SignUp = () => {
 
-    const {user, createUser, googleSignIn, emailVerification, uploadNameImageID, dUser} = useContext(AuthContext)
+    const { user, createUser, googleSignIn, emailVerification, uploadNameImageID, dUser } = useContext(AuthContext)
 
 
     const handleSignUp = async (e) => {
@@ -18,13 +18,23 @@ const SignUp = () => {
         const loginInfo = { fName, uName, email, age, bCirtificate, password }
         console.log(loginInfo);
         createUser(email, password)
-        .then(res => {
-            emailVerification();
-            console.log(res);
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .then(res => {
+                console.log(res);
+
+                // tor kam ene
+                axios.post('/user', loginInfo)
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                emailVerification();
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
 
