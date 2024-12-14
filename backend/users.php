@@ -8,8 +8,8 @@ header("Access-Control-Allow-Headers: Content-Type");
 // Database connection details
 $servername = "localhost";
 $username = "root";
-$password = "";
-$dbname = "awaj2";
+$password = "16181142015_C00lDude";
+$dbname = "awaj";
 
 // Create database connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Handle GET request (Retrieve Data)
 else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Fetch all accounts from the database
-    $sql = "SELECT fName, uName, email, age, bCirtificate, proPic, created_at FROM accounts";
+    $sql = "SELECT fName, uName, email, age, bCirtificate, proPic, created_at FROM users";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -70,8 +70,10 @@ else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     } else {
         echo json_encode(["message" => "No accounts found."]);
     }
-} 
+}
+
 // Invalid Method
+
 else {
     echo json_encode(["error" => "Invalid request method."]);
 }

@@ -2,8 +2,8 @@
 // Database configuration
 $host = "localhost";
 $user = "root";
-$password = "";
-$database = "awaj2";
+$password = "16181142015_C00lDude";
+$database = "awaj";
 
 // Establish the database connection
 $conn = new mysqli($host, $user, $password, $database);

@@ -40,6 +40,10 @@ const Routes = createBrowserRouter([
                 path: '/about',
                 element: <About />,
             },
+            {
+                path: '/users',
+                element: <About />,
+            },
         ]
     }
 ]);
