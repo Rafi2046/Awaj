@@ -17,41 +17,36 @@ if ($conn->connect_error) {
     die(json_encode(["error" => "Database connection failed: " . $conn->connect_error]));
 }
 
-// Handle POST Request (Insert a new blog)
+// POST method - Insert new blog
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents("php://input"), true);
-    
-    if (isset($data['title'], $data['content'], $data['author'], $data['user_id'])) {
-        $title = $data['title'];
-        $content = $data['content'];
-        $author = $data['author'];
-        $user_id = $data['user_id'];
+    $title = $data['title'];
+    $content = $data['content'];
+    $author = $data['author'];
+    $user_id = $data['user_id'];
 
-        // Insert blog data into the database
-        $stmt = $conn->prepare("INSERT INTO blogs (title, content, author, user_id) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("sssi", $title, $content, $author, $user_id);
-
-        if ($stmt->execute()) {
-            echo json_encode(["message" => "Blog created successfully"]);
-        } else {
-            echo json_encode(["error" => "Failed to create blog"]);
-        }
-
-        $stmt->close();
-    } else {
-        echo json_encode(["error" => "Required fields are missing"]);
+    // Validate input
+    if (empty($title) || empty($content) || empty($author) || empty($user_id)) {
+        echo json_encode(["error" => "All fields are required."]);
+        exit;
     }
+
+    // Insert blog into the database
+    $stmt = $conn->prepare("INSERT INTO blogs (title, content, author, user_id) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("sssi", $title, $content, $author, $user_id);
+
+    if ($stmt->execute()) {
+        echo json_encode(["message" => "Blog created successfully!"]);
+    } else {
+        echo json_encode(["error" => "Failed to create blog."]);
+    }
+
+    $stmt->close();
 }
 
-// Handle GET Request (Retrieve all blogs with their tags and comments)
-elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $sql = "SELECT b.blog_id, b.title, b.content, b.author, b.created_at, c.name AS category, t.name AS tag, cm.comment_text
-            FROM blogs b
-            LEFT JOIN blogs_tags bt ON b.blog_id = bt.blog_id
-            LEFT JOIN tags t ON bt.tag_id = t.tag_id
-            LEFT JOIN comments cm ON b.blog_id = cm.blog_id
-            LEFT JOIN categories c ON b.blog_id = c.category_id";
-
+// GET method - Retrieve all blogs
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $sql = "SELECT * FROM blogs";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -61,7 +56,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
         echo json_encode($blogs);
     } else {
-        echo json_encode(["message" => "No blogs found"]);
+        echo json_encode(["message" => "No blogs found."]);
     }
 }
 

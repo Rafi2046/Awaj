@@ -7,7 +7,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "awaj";
+$dbname = "awaj2";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -17,59 +17,52 @@ if ($conn->connect_error) {
     die(json_encode(["error" => "Database connection failed: " . $conn->connect_error]));
 }
 
-// Handle POST Request (Insert a new comment)
+// POST method - Insert new comment
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents("php://input"), true);
-    
-    if (isset($data['blog_id'], $data['user_id'], $data['comment_text'])) {
-        $blog_id = $data['blog_id'];
-        $user_id = $data['user_id'];
-        $comment_text = $data['comment_text'];
+    $blog_id = $data['blog_id'];
+    $user_id = $data['user_id'];
+    $comment_text = $data['comment_text'];
 
-        // Insert comment data into the database
-        $stmt = $conn->prepare("INSERT INTO comments (blog_id, user_id, comment_text) VALUES (?, ?, ?)");
-        $stmt->bind_param("iis", $blog_id, $user_id, $comment_text);
-
-        if ($stmt->execute()) {
-            echo json_encode(["message" => "Comment added successfully"]);
-        } else {
-            echo json_encode(["error" => "Failed to add comment"]);
-        }
-
-        $stmt->close();
-    } else {
-        echo json_encode(["error" => "Required fields are missing"]);
+    // Validate input
+    if (empty($blog_id) || empty($user_id) || empty($comment_text)) {
+        echo json_encode(["error" => "All fields are required."]);
+        exit;
     }
+
+    // Insert comment into the database
+    $stmt = $conn->prepare("INSERT INTO comments (blog_id, user_id, comment_text) VALUES (?, ?, ?)");
+    $stmt->bind_param("iis", $blog_id, $user_id, $comment_text);
+
+    if ($stmt->execute()) {
+        echo json_encode(["message" => "Comment added successfully!"]);
+    } else {
+        echo json_encode(["error" => "Failed to add comment."]);
+    }
+
+    $stmt->close();
 }
 
-// Handle GET Request (Retrieve comments for a specific blog)
-elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $blog_id = isset($_GET['blog_id']) ? (int)$_GET['blog_id'] : 0;
+// GET method - Retrieve all comments for a blog
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $blog_id = isset($_GET['blog_id']) ? $_GET['blog_id'] : null;
 
-    if ($blog_id > 0) {
-        $sql = "SELECT cm.comment_id, cm.comment_text, cm.created_at, u.username
-                FROM comments cm
-                LEFT JOIN users u ON cm.user_id = u.user_id
-                WHERE cm.blog_id = ?";
-        
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $blog_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            $comments = [];
-            while ($row = $result->fetch_assoc()) {
-                $comments[] = $row;
-            }
-            echo json_encode($comments);
-        } else {
-            echo json_encode(["message" => "No comments found for this blog"]);
-        }
-
-        $stmt->close();
+    if ($blog_id) {
+        $sql = "SELECT * FROM comments WHERE blog_id = $blog_id";
     } else {
-        echo json_encode(["error" => "Invalid blog ID"]);
+        $sql = "SELECT * FROM comments";
+    }
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $comments = [];
+        while($row = $result->fetch_assoc()) {
+            $comments[] = $row;
+        }
+        echo json_encode($comments);
+    } else {
+        echo json_encode(["message" => "No comments found."]);
     }
 }
 
