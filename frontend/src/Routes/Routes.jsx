@@ -9,6 +9,7 @@ import SignUp from "../Components/Authentication/SignUp/SignUp";
 import Contact from "../Components/Contact/contact";
 import TermsAndConditions from "../Components/TermsAndConditions/TermsAndConditions";
 import About from "../Components/About/About";
+import Users from "../Components/Users/Users";
 
 const Routes = createBrowserRouter([
     {
@@ -42,7 +43,7 @@ const Routes = createBrowserRouter([
             },
             {
                 path: '/users',
-                element: <About />,
+                element: <Users />,
             },
         ]
     }

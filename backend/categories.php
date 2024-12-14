@@ -6,7 +6,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "16181142015_C00lDude";
 $dbname = "awaj";
 
 // Create connection
