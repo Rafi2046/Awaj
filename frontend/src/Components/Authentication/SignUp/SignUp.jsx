@@ -25,7 +25,7 @@ const SignUp = () => {
         const bCirtificate = form.bCirtificate.value;
         const proPic = proPicS;
         const password = form.password.value;
-        const loginInfo = { fName, uName, email, age, bCirtificate, password }
+        const loginInfo = { fName, uName, email, age, bCirtificate, password, proPic }
         console.log(loginInfo);
         createUser(email, password)
             .then(res => {
@@ -39,7 +39,7 @@ const SignUp = () => {
 
                     })
                 // tor kam ene
-                axios.post('../../../../../backend/signup.php', loginInfo)
+                axios.post('http://localhost:8000/accounts.php', loginInfo)
                     .then(function (response) {
                         console.log(response);
                         navigate('/')

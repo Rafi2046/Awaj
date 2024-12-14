@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
 $user = "root";
-$password = "";
-$database = "bloggingsystem";
+$password = "16181142015_C00lDude";
+$database = "awaj";
 
 $conn = new mysqli($host, $user, $password, $database);
 

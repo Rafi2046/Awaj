@@ -48,8 +48,9 @@ const Navbar = () => {
                     user ?
 
                         <div className="dropdown dropdown-end  ml-5">
-                            <div tabIndex={0} role="button" className="w-10 rounded-full">
-                                <img className="rounded-full" src={user?.photoURL} alt={user?.displayName} />
+                            <div tabIndex={0} role="button" className="flex rounded-full justify-center items-center space-x-2">
+                                <h1>{user?.displayName}</h1>
+                                <img className="rounded-full w-10" src={user?.photoURL} alt={user?.displayName} />
                             </div>
                             <ul
                                 tabIndex={0}

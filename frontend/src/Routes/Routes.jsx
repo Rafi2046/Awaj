@@ -6,7 +6,7 @@ import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import Home from "../Components/Home/home";
 import LogIn from "../Components/Authentication/LogIn/LogIn";
 import SignUp from "../Components/Authentication/SignUp/SignUp";
-import Contact from "../Components/Authentication/Contact/contact";
+import Contact from "../Components/Contact/contact";
 import TermsAndConditions from "../Components/TermsAndConditions/TermsAndConditions";
 import About from "../Components/About/About";
 

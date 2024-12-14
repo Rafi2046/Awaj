@@ -5,9 +5,9 @@ header("Access-Control-Allow-Methods: POST, GET");
 header("Access-Control-Allow-Headers: Content-Type");
 
 $servername = "localhost";
-$username = "root"; 
-$password = "";
-$dbname = "bloggingsystem";
+$username = "root";
+$password = "16181142015_C00lDude";
+$dbname = "awaj";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -53,4 +53,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $conn->close();
-?>

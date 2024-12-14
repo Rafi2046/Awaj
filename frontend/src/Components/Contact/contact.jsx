@@ -17,17 +17,21 @@ function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("./awaj/backend/contact.php", formData)
+      .post("http://localhost:8000/contact.php", formData)
       .then((response) => {
         if (response.data.message) {
           setResponseMessage(response.data.message);
           setFormData({ name: "", email: "", message: "" });
+          console.log("line 25");
         } else if (response.data.error) {
           setResponseMessage(response.data.error);
+          
+          console.log("line 29");
         }
       })
       .catch((error) => {
         setResponseMessage("An error occurred. Please try again later.");
+        console.log("line 34");
       });
   };
 
