@@ -11,17 +11,17 @@ const Navbar = () => {
     console.log(user);
 
     const navLinks = <>
-        <li><NavLink>Item 1</NavLink></li>
+        <li><NavLink to={'/'}>Home</NavLink></li>
+        <li><NavLink to={'/contact'}>Contact</NavLink></li>
         <li>
             <details >
-                <summary >Parent</summary>
+                <summary >More</summary>
                 <ul className="p-2">
-                    <li><NavLink>Submenu 1</NavLink></li>
-                    <li><NavLink>Submenu 2</NavLink></li>
+                    <li><NavLink to={'/about'}>About</NavLink></li>
+                    <li><NavLink to={'/termsandconditions'}>T&C</NavLink></li>
                 </ul>
             </details>
         </li>
-        <li><NavLink>Item 3</NavLink></li>
     </>
 
     return (
@@ -48,10 +48,8 @@ const Navbar = () => {
                     user ?
 
                         <div className="dropdown dropdown-end  ml-5">
-                            <div tabIndex={0} role="button" className="avatar online placeholder">
-                                <div className="bg-neutral text-neutral-content w-10 rounded-full">
-                                    <span className="text-xl">AI</span>
-                                </div>
+                            <div tabIndex={0} role="button" className="w-10 rounded-full">
+                                <img className="rounded-full" src={user?.photoURL} alt={user?.displayName} />
                             </div>
                             <ul
                                 tabIndex={0}

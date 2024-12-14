@@ -6,6 +6,9 @@ import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import Home from "../Components/Home/home";
 import LogIn from "../Components/Authentication/LogIn/LogIn";
 import SignUp from "../Components/Authentication/SignUp/SignUp";
+import Contact from "../Components/Authentication/Contact/contact";
+import TermsAndConditions from "../Components/TermsAndConditions/TermsAndConditions";
+import About from "../Components/About/About";
 
 const Routes = createBrowserRouter([
     {
@@ -24,7 +27,19 @@ const Routes = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUp />,
-            }
+            },
+            {
+                path: '/contact',
+                element: <Contact />,
+            },
+            {
+                path: '/termsandconditions',
+                element: <TermsAndConditions />,
+            },
+            {
+                path: '/about',
+                element: <About />,
+            },
         ]
     }
 ]);
